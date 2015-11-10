@@ -2,6 +2,8 @@ package com.example.Model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by jhipster on 8/10/15.
@@ -9,36 +11,34 @@ import java.util.Date;
 
 @Entity
 public class Jugador {
+    @ManyToOne
+    Equipo equipo;
+    @Column
+    String nombre;
+    @Column
+    Date fechaNacimiento;
+    @Column
+    int canastasTotales;
+    @Column
+    int asistenciasTotales;
+    @Column
+    int rebotesTotales;
+    @Column
+    String posicionCampo;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
 
-    @Column
-    String nombre;
-
-    @Column
-    Date fechaNacimiento;
-
-    @Column
-    int canastasTotales;
-
-    @Column
-    int asistenciasTotales;
-
-    @Column
-    int rebotesTotales ;
-
-    @Column
-    String posicionCampo;
-
-    public Jugador (String nombre,Date fechaNacimiento,int canastasTotales,int asistenciasTotales, int rebotesTotales,String posicionCampo){
+    public Jugador(Equipo equipo, String nombre, Date fechaNacimiento, int canastasTotales, int asistenciasTotales, int rebotesTotales, String posicionCampo) {
+        this.equipo = equipo;
         this.nombre=nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.canastasTotales = canastasTotales;
         this.asistenciasTotales = asistenciasTotales;
         this.rebotesTotales = rebotesTotales;
         this.posicionCampo = posicionCampo;
+
     }
 
     public int getRebotesTotales() {
@@ -101,12 +101,21 @@ public class Jugador {
     public String toString() {
         return "Jugador{" +
                 "id=" + id +
+                ", equipo=" + equipo +
                 ", nombre='" + nombre + '\'' +
-                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
                 ", canastasTotales=" + canastasTotales +
                 ", asistenciasTotales=" + asistenciasTotales +
                 ", rebotesTotales=" + rebotesTotales +
                 ", posicionCampo='" + posicionCampo + '\'' +
                 '}';
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 }
