@@ -1,5 +1,7 @@
 package com.example.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +13,7 @@ public class Liga {
     @Column
     String nombre;
     @OneToMany(mappedBy = "liga")
+    @JsonIgnore
     Set<Temporada> temporadas = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

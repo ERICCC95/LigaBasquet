@@ -90,7 +90,8 @@ JugadorRepository jugadorRepository;
         System.out.println(jugadorRepository.findByEquipoNombreAndPosicionCampo("Barca", "Alero"));
         System.out.println("el jugador con mas canastas es " + jugadorRepository.findTopByOrderByCanastasTotalesDesc());
         System.out.println("Los jugadores con mas asistencias es " + jugadorRepository.findFirst5ByOrderByAsistenciasTotalesDesc());
-        System.out.println(jugadorRepository.findByEquipoNombreAndTopCanastasTotales("Barca", new PageRequest(0, 1)));
+
+        System.out.println("El mejor jugador dl barça es: " + jugadorRepository.findByEquipoNombreAndTopCanastasTotales("Barca", new PageRequest(0, 1)));
 
     }
 

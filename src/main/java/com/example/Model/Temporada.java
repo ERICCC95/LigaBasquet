@@ -1,5 +1,7 @@
 package com.example.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,14 +12,22 @@ public class Temporada {
 
     @Column
     int anio;
+    @JsonIgnore
     @ManyToOne
+
     Liga liga;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
+
+
+    @JsonIgnore
     @ManyToMany
     private Set<Equipo> equipos = new HashSet<>();
+
+    public Temporada() {
+    }
 
     public Temporada(int anio) {
         this.anio = anio;

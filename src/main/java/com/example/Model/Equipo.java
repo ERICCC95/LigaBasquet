@@ -1,5 +1,7 @@
 package com.example.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -10,22 +12,25 @@ import java.util.Set;
  */
 @Entity
 public class Equipo {
-    @OneToMany(mappedBy = "equipo")
-    Set<Jugador> jugadores = new HashSet<>();
     @Column
     String nombre;
     @Column
     String localidad;
     @Column
     Date fecha;
+    @JsonIgnore
+    @OneToMany(mappedBy = "equipo")
+    Set<Jugador> jugadores = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
+    @JsonIgnore
     @ManyToMany(mappedBy = "equipos")
     private Set<Temporada> temporadas = new HashSet<>();
 
     public Equipo() {
+
     }
 
     public Equipo(String nombre, String localidad, Date fecha) {

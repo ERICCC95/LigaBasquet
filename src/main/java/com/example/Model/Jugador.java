@@ -1,5 +1,7 @@
 package com.example.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,8 +13,6 @@ import java.util.Set;
 
 @Entity
 public class Jugador {
-    @ManyToOne
-    Equipo equipo;
     @Column
     String nombre;
     @Column
@@ -25,10 +25,17 @@ public class Jugador {
     int rebotesTotales;
     @Column
     String posicionCampo;
+    @JsonIgnore
+    @ManyToOne
+    Equipo equipo;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
+
+    public Jugador() {
+
+    }
 
     public Jugador(Equipo equipo, String nombre, Date fechaNacimiento, int canastasTotales, int asistenciasTotales, int rebotesTotales, String posicionCampo) {
         this.equipo = equipo;
@@ -40,6 +47,7 @@ public class Jugador {
         this.posicionCampo = posicionCampo;
 
     }
+
 
     public int getRebotesTotales() {
         return rebotesTotales;
